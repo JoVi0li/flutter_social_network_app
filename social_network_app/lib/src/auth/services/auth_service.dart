@@ -34,10 +34,8 @@ class AuthService extends ValueNotifier<AuthState> {
   _getUser() {
     userAuthenticated = _auth.currentUser;
     if (userAuthenticated != null) {
-      print('_getUser: ${userAuthenticated!.email}');
       value = AuthenticatedState(user: userAuthenticated!);
 
-      print(value);
     } else {
       value = InitialState();
     }

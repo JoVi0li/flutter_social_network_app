@@ -7,7 +7,6 @@ import 'package:social_network_app/src/global/widgets/custom_divider.dart';
 import 'package:social_network_app/src/global/widgets/custom_icon_button.dart';
 import 'package:social_network_app/src/global/widgets/large_button.dart';
 import 'package:social_network_app/src/global/widgets/outlined_input.dart';
-import 'package:social_network_app/src/utils/app_routes.dart';
 import 'package:social_network_app/src/utils/constanst.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -35,7 +34,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         _emailController.text,
         _passwordController.text,
       );
-      
     } on ErrorState catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -44,6 +42,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       );
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +104,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           const SizedBox(height: 60),
                           LargeButton(
                             text: 'Cadastrar',
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                register();
+                                await register();
                               }
                             },
                           ),

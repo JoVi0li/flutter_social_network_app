@@ -30,27 +30,31 @@ class _SuccessWidgetState extends State<SuccessWidget>
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 100,
-        ),
-        child: Column(
-          children: [
-            Lottie.asset(
-              'assets/lottie/success_animation.json',
-              controller: _animationController,
-            ),
-            Text(
-              widget.success,
-              style: Theme.of(context).textTheme.headline1,
-              textAlign: TextAlign.center,
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 100,
+          ),
+          child: Column(
+            children: [
+              Lottie.asset(
+                'assets/lottie/success_animation.json',
+                controller: _animationController,
+              ),
+              Text(
+                widget.success,
+                style: Theme.of(context).textTheme.headline1,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

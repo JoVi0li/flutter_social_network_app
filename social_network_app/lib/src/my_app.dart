@@ -9,12 +9,12 @@ import 'package:social_network_app/src/auth/services/auth_service.dart';
 import 'package:social_network_app/src/auth/states/auth_state.dart';
 import 'package:social_network_app/src/auth/states/authenticated_state.dart';
 import 'package:social_network_app/src/auth/states/initial_state.dart';
-import 'package:social_network_app/src/home/widgets/home_widget.dart';
+import 'package:social_network_app/src/feed/screens/feed_screen.dart';
 import 'package:social_network_app/src/utils/app_routes.dart';
 import 'package:social_network_app/src/utils/constanst.dart';
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                 if (state is InitialState) {
                   const AuthScreen();
                 } else if (state is AuthenticatedState) {
-                  return const HomeWidget();
+                  return const FeedScreen();
                 }
                 return const AuthScreen();
               },

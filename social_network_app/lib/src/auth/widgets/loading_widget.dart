@@ -31,23 +31,25 @@ class _LoadingWidgetState extends State<LoadingWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 100),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              'assets/lottie/loading_animation.json',
-              controller: _animationController,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              'Aguarde...',
-              style: Theme.of(context).textTheme.headline1,
-              textAlign: TextAlign.center,
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 100),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/lottie/loading_animation.json',
+                controller: _animationController,
+              ),
+              const SizedBox(height: 15),
+              Text(
+                'Aguarde...',
+                style: Theme.of(context).textTheme.headline1,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );

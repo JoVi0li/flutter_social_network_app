@@ -21,7 +21,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget>
   void initState() {
     super.initState();
     _animationController = AnimationController(vsync: this);
-    _animationController.duration = Duration(seconds: 3);
+    _animationController.duration = const Duration(seconds: 3);
     _animationController.repeat();
   }
 
@@ -35,34 +35,36 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              'assets/lottie/error_animation.json',
-              controller: _animationController,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              'Ops! Parece que ocorreu um erro, tente novamente!',
-              style: Theme.of(context).textTheme.bodyText1,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              'Excessão: ${widget.error}',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            const SizedBox(height: 30),
-            LargeButton(
-              text: 'Tentar novamente',
-              onPressed: () {
-                context.read<AuthService>().resetState();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/lottie/error_animation.json',
+                controller: _animationController,
+              ),
+              const SizedBox(height: 15),
+              Text(
+                'Ops! Parece que ocorreu um erro, tente novamente!',
+                style: Theme.of(context).textTheme.bodyText1,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 15),
+              Text(
+                'Excessão: ${widget.error}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const SizedBox(height: 30),
+              LargeButton(
+                text: 'Tentar novamente',
+                onPressed: () {
+                  context.read<AuthService>().resetState();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
