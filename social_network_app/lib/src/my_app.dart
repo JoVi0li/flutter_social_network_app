@@ -1,25 +1,43 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:social_network_app/src/auth/widgets/auth_widget.dart';
-import 'package:social_network_app/src/auth/widgets/login_widget.dart';
-import 'package:social_network_app/src/auth/widgets/register_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:social_network_app/src/auth/screens/auth_screen.dart';
+import 'package:social_network_app/src/auth/screens/login_screen.dart';
+import 'package:social_network_app/src/auth/screens/register_screen.dart';
+import 'package:social_network_app/src/auth/services/auth_service.dart';
+import 'package:social_network_app/src/auth/states/auth_state.dart';
+import 'package:social_network_app/src/auth/states/authenticated_state.dart';
+import 'package:social_network_app/src/auth/states/initial_state.dart';
+import 'package:social_network_app/src/home/widgets/home_widget.dart';
 import 'package:social_network_app/src/utils/app_routes.dart';
 import 'package:social_network_app/src/utils/constanst.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key);
 
-  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late Future<FirebaseApp> _fbApp;
+  late AuthService _authService;
+
+  @override
+  void initState() {
+    super.initState();
+    _fbApp = Firebase.initializeApp();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        AppRoutes.AUTH: (ctx) => const AuthWidget(),
-        AppRoutes.LOGIN: (ctx) =>  const LoginWidget(),
-        AppRoutes.REGISTER: (ctx) => const RegisterWidget(),
+        AppRoutes.AUTH: (ctx) => const AuthScreen(),
+        AppRoutes.LOGIN: (ctx) => const LoginScreen(),
+        AppRoutes.REGISTER: (ctx) => const RegisterScreen(),
       },
       theme: ThemeData(
         textTheme: TextTheme(
@@ -42,9 +60,7 @@ class MyApp extends StatelessWidget {
             fontSize: 14.0,
             color: Colors.white,
             fontWeight: FontWeight.normal,
-            
           ),
-          
         ),
       ),
       home: FutureBuilder(
@@ -55,7 +71,18 @@ class MyApp extends StatelessWidget {
               'Erro na inicialização do app: ${snapshot.error.toString()}',
             );
           } else if (snapshot.hasData) {
-            return const AuthWidget();
+            _authService = context.read<AuthService>();
+            return ValueListenableBuilder<AuthState>(
+              valueListenable: _authService,
+              builder: (_, state, child) {
+                if (state is InitialState) {
+                  const AuthScreen();
+                } else if (state is AuthenticatedState) {
+                  return const HomeWidget();
+                }
+                return const AuthScreen();
+              },
+            );
           } else {
             return const CircularProgressIndicator();
           }

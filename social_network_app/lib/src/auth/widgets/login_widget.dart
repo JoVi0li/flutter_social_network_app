@@ -17,18 +17,23 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
-
+  final TextEditingController _emailController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late final AuthService auth;
+
+  @override
+  void initState() {
+    super.initState();
+    auth = context.read<AuthService>();
+  }
 
   login() async {
     try {
-      await context.read<AuthService>().login(
-            _emailController.text,
-            _passwordController.text,
-          );
+      await auth.login(
+        _emailController.text,
+        _passwordController.text,
+      );
     } on ErrorState catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -98,7 +103,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                           LargeButton(
                             text: 'Entrar',
                             onPressed: () {
-                              login();
+                              if (_formKey.currentState!.validate()) {
+                                login();
+                              }
                             },
                           ),
                         ],

@@ -7,6 +7,7 @@ import 'package:social_network_app/src/global/widgets/custom_divider.dart';
 import 'package:social_network_app/src/global/widgets/custom_icon_button.dart';
 import 'package:social_network_app/src/global/widgets/large_button.dart';
 import 'package:social_network_app/src/global/widgets/outlined_input.dart';
+import 'package:social_network_app/src/utils/app_routes.dart';
 import 'package:social_network_app/src/utils/constanst.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -18,17 +19,23 @@ class RegisterWidget extends StatefulWidget {
 
 class _RegisterWidgetState extends State<RegisterWidget> {
   final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late final AuthService auth;
+
+  @override
+  void initState() {
+    super.initState();
+    auth = context.read<AuthService>();
+  }
 
   register() async {
     try {
-      await context.read<AuthService>().register(
-            _emailController.text,
-            _passwordController.text,
-          );
+      await auth.register(
+        _emailController.text,
+        _passwordController.text,
+      );
+      
     } on ErrorState catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

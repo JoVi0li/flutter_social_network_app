@@ -1,18 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_network_app/src/auth/services/auth_service.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final user = ModalRoute.of(context)!.settings.arguments as User;
+    final user = context.read<AuthService>().userAuthenticated;
     return Scaffold(
       body: Center(
         child: Column(
           children: [
             const Text('Tela home'),
-            Text('Usuário cadastrado: ${user.displayName}')
+            Text('Usuário cadastrado: ${user!.email}')
           ],
         ),
       ),

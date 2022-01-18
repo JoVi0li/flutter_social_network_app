@@ -1,3 +1,3 @@
-class AuthState{
+abstract class AuthState{
   
 }
