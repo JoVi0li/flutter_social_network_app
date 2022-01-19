@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Social Network App',
       debugShowCheckedModeBanner: false,
       routes: {
         AppRoutes.AUTH: (ctx) => const AuthScreen(),

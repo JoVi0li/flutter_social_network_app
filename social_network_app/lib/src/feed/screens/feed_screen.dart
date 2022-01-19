@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_network_app/src/feed/widgets/app_bar.dart';
+import 'package:social_network_app/src/feed/widgets/post_widget.dart';
 import 'package:social_network_app/src/utils/constanst.dart';
 
 class FeedScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _FeedScreenState extends State<FeedScreen> {
       backgroundColor: primaryColor,
       body: CustomScrollView(
         slivers: [
-          const CustomSliverAppBar(),
+           CustomSliverAppBar(),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -29,11 +30,11 @@ class _FeedScreenState extends State<FeedScreen> {
                   color: index.isOdd ? Colors.white : Colors.black12,
                   height: 100.0,
                   child: Center(
-                    child: Text('$index', textScaleFactor: 5),
+                    child: PostWidget(),
                   ),
                 );
               },
-              childCount: 20,
+              childCount: 1,
             ),
           ),
         ],
