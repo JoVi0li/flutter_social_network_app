@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:social_network_app/src/global/widgets/outlined_input.dart';
 import 'package:social_network_app/src/utils/constanst.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
@@ -14,7 +13,6 @@ class CustomSliverAppBar extends StatelessWidget {
       pinned: true,
       floating: false,
       snap: false,
-      // titleSpacing: 0.0,
       toolbarHeight: 152,
       expandedHeight: 400,
       shape: const RoundedRectangleBorder(
@@ -61,7 +59,6 @@ class CustomSliverAppBar extends StatelessWidget {
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        
         background: Padding(
           padding: const EdgeInsets.only(bottom: 30),
           child: SizedBox(
@@ -87,11 +84,6 @@ class CustomSliverAppBar extends StatelessWidget {
                         margin: const EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: shadowColor,
-                            width: 2,
-                            style: BorderStyle.solid,
-                          ),
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
@@ -144,7 +136,6 @@ class CustomSliverAppBar extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-      
                       labelText: 'Pesquise o que ou quem deseja encontrar',
                       labelStyle: Theme.of(context)
                           .textTheme
