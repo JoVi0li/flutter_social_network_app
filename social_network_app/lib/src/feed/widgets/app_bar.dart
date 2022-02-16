@@ -105,7 +105,9 @@ class CustomSliverAppBar extends StatelessWidget {
                   ),
                   child: TextFormField(
                     controller: _textEditingController,
-                    validator: (value) {},
+                    validator: (value) {
+                      if (value!.isEmpty) return "Digite algo para procurar";
+                    },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(

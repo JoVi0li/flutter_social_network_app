@@ -6,7 +6,10 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        vertical: 10,
+      ),
       width: MediaQuery.of(context).size.width,
       height: 407.0,
       child: Stack(
@@ -62,6 +65,7 @@ class PostWidget extends StatelessWidget {
                       right: 20,
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -97,7 +101,59 @@ class PostWidget extends StatelessWidget {
                           ],
                         ),
                         Row(
-                          children: const [],
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Felipe Augusto  " "Pôr do sol maravilhoso!",
+                                style: Theme.of(context).textTheme.headline6,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "Há 9 minutos!",
+                          style:
+                              Theme.of(context).textTheme.headline6?.copyWith(
+                                    fontSize: 11,
+                                  ),
+                        ),
+                        Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: 2,
+                            color: accentColor,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              "Você e outras 110 pessoas",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(fontSize: 11),
+                            ),
+                            const Spacer(),
+                            Text(
+                              "14 comentários",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(fontSize: 11),
+                            )
+                          ],
                         ),
                       ],
                     ),
